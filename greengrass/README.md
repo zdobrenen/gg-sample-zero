@@ -129,7 +129,7 @@ While also showcasing advanced features of Greengrass for acting on device event
 device telemetry.
 
 NOTE: This example application leverages [InfluxDB](https://www.influxdata.com/) for persisting device telemetry locally
-on the Greengrass Core device. Please, refer to [pi-image-gen](https://bitbucket.org/petrichorai-budwatch/pi-image-gen/src/grassbian/)
+on the Greengrass Core device. Please, refer to [gg-raspbian](https://github.com/zdobrenen/gg-raspbian/tree/grassbian)
 for building a custom raspbian image with pre-requisites already installed and configured. Or, if you have
 successfully followed the Greengrass Getting Started guide and have an operational Greengrass Core, refer
 to [InfluxDB Installation](https://docs.influxdata.com/influxdb/v1.7/introduction/installation/).
