@@ -1,0 +1,115 @@
+---
+
+- name: Provision Greengrass Device
+  hosts: all
+  vars:
+   remote_user: "{{ pi_user }}"
+   device_name: "GG_LED_BLUE"
+   groups_name: "sample_zero"
+  tasks:
+    - name: Stop Greengrass Device
+      become: true
+      systemd:
+        name: "{{ device_name }}"
+        state: stopped
+      ignore_errors: yes
+
+
+    - name: Remove Greengrass Device groupCA
+      become: true
+      file:
+        path: "/gg_devices/{{ device_name }}/groupCA/"
+        state: absent
+      ignore_errors: yes
+
+
+    - name: Create Greengrass Device Directory
+      become: true
+      file:
+        path: "/gg_devices/{{ device_name }}"
+        state: directory
+
+
+    - name: Create Greengrass Certs Directory
+      become: true
+      file:
+        path: "/greengrass/certs"
+        state: directory
+
+
+    - name: Copy Greengrass Scripts to Remote
+      become: true
+      copy:
+        src: "./"
+        dest: "/gg_devices/{{ device_name}}"
+
+
+    - name: Copy Greengrass Root Certs to Remote
+      become: true
+      copy:
+        src: "{{ item }}"
+        dest: /greengrass/certs/
+      with_fileglob:
+        - "../../../groups/{{ groups_name }}/.gg/certs/root.*"
+
+
+    - name: Copy Greengrass Device Certs to Remote
+      become: true
+      copy:
+        src: "{{ item }}"
+        dest: /greengrass/certs/
+      with_fileglob:
+        - "../../../groups/{{ groups_name }}/.gg/certs/{{ device_name }}.*"
+
+
+    - name: Install required base system packages
+      become: true
+      apt: pkg={{ item }}
+           update_cache=true
+           state=present
+      with_items:
+        - python-setuptools
+        - python-dev
+        - python-rpi.gpio
+
+
+    - name: Install pip
+      become: true
+      easy_install: name=pip
+
+
+    - name: Install Global Pip Packages
+      become: true
+      pip: name={{ item }}
+      with_items:
+        - virtualenv
+
+
+    - name: Creating Virtualenv
+      become: true
+      command: virtualenv /gg_devices/{{ device_name }}/venv --no-site-packages
+               creates=/gg_devices/{{ device_name }}/venv/bin/activate
+
+
+    - name: Install Python Dependencies to Virtualenv
+      become: true
+      pip:
+        chdir: "/gg_devices/{{ device_name }}"
+        requirements: "requirements.txt"
+        virtualenv: "/gg_devices/{{ device_name }}/venv"
+
+
+    - name: Create Systemd Device Service
+      become: true
+      template:
+        src: systemd.service.j2
+        dest: "/etc/systemd/system/{{ device_name }}.service"
+        mode: 0664
+
+
+    - name: Start Greengrass Device
+      become: true
+      systemd:
+        name: "{{ device_name }}"
+        enabled: true
+        state: started

@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "mobilectrl-20181222110145-authRole",
+            "UnauthRoleArn": "arn:aws:iam::399888931340:role/mobilectrl-20181222110145-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::399888931340:role/mobilectrl-20181222110145-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "mobilectrl-20181222110145-deployment",
+            "UnauthRoleName": "mobilectrl-20181222110145-unauthRole",
+            "StackName": "mobilectrl-20181222110145",
+            "StackId": "arn:aws:cloudformation:us-west-2:399888931340:stack/mobilectrl-20181222110145/09260b90-061c-11e9-a29d-50a68af39629"
+        }
+    }
+}

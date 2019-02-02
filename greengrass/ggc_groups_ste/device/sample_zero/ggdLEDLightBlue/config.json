@@ -1,0 +1,13 @@
+{
+    "endpoint": "a3hy3ese1oynsa.iot.us-west-2.amazonaws.com",
+    "rootCAPath": "/greengrass/certs/root.ca.pem",
+    "certificatePath": "/greengrass/certs/GG_LED_BLUE.cert.pem",
+    "privateKeyPath": "/greengrass/certs/GG_LED_BLUE.private.key",
+    "thingName": "GG_LED_BLUE",
+    "clientId": "GG_LED_BLUE",
+    "deviceParams": {
+        "device": "GG_LED_BLUE",
+        "pin": 21,
+        "topic": "led/blue/telemetry/stream"
+    }
+}

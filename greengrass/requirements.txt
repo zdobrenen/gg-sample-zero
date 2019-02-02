@@ -1,0 +1,7 @@
+ipython
+awscli
+fire
+boto3
+botocore
+AWSIoTPythonSDK
+ansible

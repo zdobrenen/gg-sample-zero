@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-toolbar>
+      	<ion-title>Device Telemetry</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-card>
+		<ion-card-header>
+			<ion-icon name="close-circle" (click)="close()"></ion-icon>
+		</ion-card-header>
+ 		<ion-card-content>
+			<canvas #curActiveCanvas></canvas>
+		</ion-card-content>
+	</ion-card>
+
+    <ion-card>
+		<ion-card-header>
+			<ion-icon name="close-circle" (click)="close()"></ion-icon>
+		</ion-card-header>
+ 		<ion-card-content>
+			<canvas #curInactiveCanvas></canvas>
+		</ion-card-content>
+	</ion-card>
+
+    <ion-card>
+		<ion-card-header>
+			<ion-icon name="close-circle" (click)="close()"></ion-icon>
+		</ion-card-header>
+ 		<ion-card-content>
+			<canvas #totActiveCanvas></canvas>
+		</ion-card-content>
+	</ion-card>
+
+    <ion-card>
+		<ion-card-header>
+			<ion-icon name="close-circle" (click)="close()"></ion-icon>
+		</ion-card-header>
+ 		<ion-card-content>
+			<canvas #totInactiveCanvas></canvas>
+		</ion-card-content>
+	</ion-card>
+</ion-content>

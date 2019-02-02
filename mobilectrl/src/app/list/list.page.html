@@ -1,0 +1,20 @@
+<ion-header>
+	<ion-toolbar>
+    	<ion-title>Devices</ion-title>
+	</ion-toolbar>
+</ion-header>
+<ion-content *ngIf="deviceList">
+	<ion-card *ngFor="let item of deviceList.items; index as i">
+		<ion-card-title class="hover card-title" (click)="telemetry(item, i)">
+			{{ item.thingName }}
+		</ion-card-title>
+		<ion-card-content>
+            <ion-list>
+                <ion-item>
+                    <ion-label>Running</ion-label>
+                    <ion-toggle checked="{{ item.state.running }}" (ionChange)="modify(item, i)"></ion-toggle>
+                </ion-item>
+            </ion-list>
+		</ion-card-content>
+	</ion-card>
+</ion-content>

@@ -1,0 +1,222 @@
+{
+    "State":   {
+        "Bucket": "petrichorai-gg-groups-state"
+    },
+    "Group":   {
+        "Name": "sample_zero"
+    },
+    "Cores":   {
+        "Id": "sample_zero_Core",
+        "Name": "sample_zero_Core",
+        "SyncShadow": true
+    },
+    "Devices": {
+        "btnBlue": {
+            "Id": "GG_BTN_BLUE",
+            "thingName": "GG_BTN_BLUE",
+            "SyncShadow": true
+        },
+        "btnYellow": {
+            "Id": "GG_BTN_YELLOW",
+            "thingName": "GG_BTN_YELLOW",
+            "SyncShadow": true
+        },
+        "ledBlue": {
+            "Id": "GG_LED_BLUE",
+            "thingName": "GG_LED_BLUE",
+            "SyncShadow": true
+        },
+        "ledYellow": {
+            "Id": "GG_LED_YELLOW",
+            "thingName": "GG_LED_YELLOW",
+            "SyncShadow": true
+        }
+    },
+    "Lambdas": {
+        "ggcMasterServiceCtrl": {
+            "FunctionName": "ggcMasterServiceCtrl",
+            "Handler":      "ggcMasterServiceCtrl.function_handler",
+            "Runtime":      "python2.7",
+            "Package":      "lambda/sample_zero/ggcMasterServiceCtrl",
+            "Alias":        "GGC_MASTER_CTRL",
+            "Configuration": {
+				"EncodingType": "json",
+                "Executable": "ggcMasterServiceCtrl.function_handler",
+                "MemorySize": 50000,
+                "Pinned": true,
+                "Timeout": 5
+			}
+        },
+        "ggcPostalServiceStream": {
+            "FunctionName": "ggcPostalServiceStream",
+            "Handler":      "ggcPostalServiceStream.function_handler",
+            "Runtime":      "python2.7",
+            "Package":      "lambda/sample_zero/ggcPostalServiceStream",
+            "Alias":        "GGC_POSTAL_STREAM",
+            "Configuration": {
+				"EncodingType": "json",
+                "Executable": "ggcPostalServiceStream.function_handler",
+                "MemorySize": 50000,
+                "Pinned": true,
+                "Timeout": 5
+			}
+        },
+        "ggcPostalServiceForward": {
+            "FunctionName": "ggcPostalServiceForward",
+            "Handler":      "ggcPostalServiceForward.function_handler",
+            "Runtime":      "python2.7",
+            "Package":      "lambda/sample_zero/ggcPostalServiceForward",
+            "Alias":        "GGC_POSTAL_FORWARD",
+            "Configuration": {
+				"EncodingType": "json",
+                "Executable": "ggcPostalServiceForward.function_handler",
+                "MemorySize": 50000,
+                "Pinned": true,
+                "Timeout": 5
+			}
+        }
+
+    },
+    "Resources": {
+        "defaultInterface": {
+            "Id": "defaultInterface",
+            "Name": "defaultInterface",
+            "ResourceDataContainer": {
+                "LocalDeviceResourceData": {
+                    "GroupOwnerSetting": {
+                        "AutoAddGroupOwner": true
+                    },
+                    "SourcePath": "/dev/ttyAMA0"
+                }
+            }
+        }
+    },
+    "Subscriptions": {
+        "postalTelemetryStreamForward": {
+            "Id": "postal_telemetry_stream_forward",
+            "Source": "Lambda::ggcPostalServiceForward",
+            "Subject": "postal/telemetry/stream/forward",
+            "Target": "cloud"
+        },
+        "btnBlueTelemetryStream": {
+            "Id": "btn_blue_telemetry_stream",
+            "Source": "Device::GG_BTN_BLUE",
+            "Subject": "btn/blue/telemetry/stream",
+            "Target": "Lambda::ggcPostalServiceStream"
+        },
+        "btnBlueShadowUpdate": {
+            "Id": "btn_blue_shadow_update",
+            "Source": "Device::GG_BTN_BLUE",
+            "Subject": "$aws/things/GG_BTN_BLUE/shadow/update",
+            "Target": "GGShadowService"
+        },
+        "btnBlueShadowDelta": {
+            "Id": "btn_blue_shadow_delta",
+            "Source": "GGShadowService",
+            "Subject": "$aws/things/GG_BTN_BLUE/shadow/update/delta",
+            "Target": "Device::GG_BTN_BLUE"
+        },
+        "btnBlueShadowAccepted": {
+            "Id": "btn_blue_shadow_accepted",
+            "Source": "GGShadowService",
+            "Subject": "$aws/things/GG_BTN_BLUE/shadow/update/accepted",
+            "Target": "Device::GG_BTN_BLUE"
+        },
+        "btnBlueShadowRejected": {
+            "Id": "btn_blue_shadow_rejected",
+            "Source": "GGShadowService",
+            "Subject": "$aws/things/GG_BTN_BLUE/shadow/update/rejected",
+            "Target": "Device::GG_BTN_BLUE"
+        },
+        "btnYellowTelemetryStream": {
+            "Id": "btn_yellow_telemetry_stream",
+            "Source": "Device::GG_BTN_YELLOW",
+            "Subject": "btn/yellow/telemetry/stream",
+            "Target": "Lambda::ggcPostalServiceStream"
+        },
+        "btnYellowShadowUpdate": {
+            "Id": "btn_yellow_shadow_update",
+            "Source": "Device::GG_BTN_YELLOW",
+            "Subject": "$aws/things/GG_BTN_YELLOW/shadow/update",
+            "Target": "GGShadowService"
+        },
+        "btnYellowShadowDelta": {
+            "Id": "btn_yellow_shadow_delta",
+            "Source": "GGShadowService",
+            "Subject": "$aws/things/GG_BTN_YELLOW/shadow/update/delta",
+            "Target": "Device::GG_BTN_YELLOW"
+        },
+        "btnYellowShadowAccepted": {
+            "Id": "btn_yellow_shadow_accepted",
+            "Source": "GGShadowService",
+            "Subject": "$aws/things/GG_BTN_YELLOW/shadow/update/accepted",
+            "Target": "Device::GG_BTN_YELLOW"
+        },
+        "btnYellowShadowRejected": {
+            "Id": "btn_yellow_shadow_rejected",
+            "Source": "GGShadowService",
+            "Subject": "$aws/things/GG_BTN_YELLOW/shadow/update/rejected",
+            "Target": "Device::GG_BTN_YELLOW"
+        },
+        "ledBlueTelemetryStream": {
+            "Id": "led_blue_telemetry_stream",
+            "Source": "Device::GG_LED_BLUE",
+            "Subject": "led/blue/telemetry/stream",
+            "Target": "Lambda::ggcPostalServiceStream"
+        },
+        "ledBlueShadowUpdate": {
+            "Id": "led_blue_shadow_update",
+            "Source": "Device::GG_LED_BLUE",
+            "Subject": "$aws/things/GG_LED_BLUE/shadow/update",
+            "Target": "GGShadowService"
+        },
+        "ledBlueShadowDelta": {
+            "Id": "led_blue_shadow_delta",
+            "Source": "GGShadowService",
+            "Subject": "$aws/things/GG_LED_BLUE/shadow/update/delta",
+            "Target": "Device::GG_LED_BLUE"
+        },
+        "ledBlueShadowAccepted": {
+            "Id": "led_blue_shadow_accepted",
+            "Source": "GGShadowService",
+            "Subject": "$aws/things/GG_LED_BLUE/shadow/update/accepted",
+            "Target": "Device::GG_LED_BLUE"
+        },
+        "ledBlueShadowRejected": {
+            "Id": "led_blue_shadow_rejected",
+            "Source": "GGShadowService",
+            "Subject": "$aws/things/GG_LED_BLUE/shadow/update/rejected",
+            "Target": "Device::GG_LED_BLUE"
+        },
+        "ledYellowTelemetryStream": {
+            "Id": "led_yellow_telemetry_stream",
+            "Source": "Device::GG_LED_YELLOW",
+            "Subject": "led/yellow/telemetry/stream",
+            "Target": "Lambda::ggcPostalServiceStream"
+        },
+        "ledYellowShadowUpdate": {
+            "Id": "led_yellow_shadow_update",
+            "Source": "Device::GG_LED_YELLOW",
+            "Subject": "$aws/things/GG_LED_YELLOW/shadow/update",
+            "Target": "GGShadowService"
+        },
+        "ledYellowShadowDelta": {
+            "Id": "led_yellow_shadow_delta",
+            "Source": "GGShadowService",
+            "Subject": "$aws/things/GG_LED_YELLOW/shadow/update/delta",
+            "Target": "Device::GG_LED_YELLOW"
+        },
+        "ledYellowShadowAccepted": {
+            "Id": "led_yellow_shadow_accepted",
+            "Source": "GGShadowService",
+            "Subject": "$aws/things/GG_LED_YELLOW/shadow/update/accepted",
+            "Target": "Device::GG_LED_YELLOW"
+        },
+        "ledYellowShadowRejected": {
+            "Id": "led_yellow_shadow_rejected",
+            "Source": "GGShadowService",
+            "Subject": "$aws/things/GG_LED_YELLOW/shadow/update/rejected",
+            "Target": "Device::GG_LED_YELLOW"
+        }
+    }
+}

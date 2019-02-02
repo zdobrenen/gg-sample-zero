@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Sample Zero</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="authState.loggedIn">
+    <ion-slides pager>
+        <ion-slide *ngFor="let slide of slides">
+			<ion-card>
+				<ion-card-content>
+					<ion-card-title>
+      					{{ slide.title }}
+					</ion-card-title>
+					<p>{{ slide.description }}</p>
+				</ion-card-content>
+			</ion-card>
+        </ion-slide>
+    </ion-slides>
+</ion-content>
+
+<ion-content *ngIf="!authState.loggedIn">
+    <amplify-authenticator framework="ionic"></amplify-authenticator>
+</ion-content>

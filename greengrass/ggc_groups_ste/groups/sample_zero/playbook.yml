@@ -1,0 +1,45 @@
+---
+
+- name: Provision Greengrass Group
+  hosts: all
+  vars:
+   remote_user: "{{ pi_user }}"
+   groups_name: "sample_zero"
+  tasks:
+    - name: Stop Greengrass Core
+      become: true
+      systemd:
+        name: greengrass
+        state: stopped
+
+
+    - name: Copy Greengrass Config to Remote
+      become: true
+      copy:
+        src: .gg/config/
+        dest: /greengrass/config/
+
+
+    - name: Copy Greengrass Root Certs to Remote
+      become: true
+      copy:
+        src: "{{ item }}"
+        dest: /greengrass/certs/
+      with_fileglob:
+        - ".gg/certs/root.*"
+
+
+    - name: Copy Greengrass Device Certs to Remote
+      become: true
+      copy:
+        src: "{{ item }}"
+        dest: /greengrass/certs/
+      with_fileglob:
+        - ".gg/certs/{{ groups_name }}*"
+
+
+    - name: Start Greengrass Core
+      become: true
+      systemd:
+        name: greengrass
+        state: started

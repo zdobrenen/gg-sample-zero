@@ -1,0 +1,47 @@
+service: iot-telemetry-rest
+provider:
+  name: aws
+  stage: Prod
+  runtime: python2.7
+  region: us-west-2
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:*"
+      Resource:
+        - "*"
+    - Effect: "Allow"
+      Action:
+        - "iot:*"
+      Resource:
+        - "*"
+    - Effect: "Allow"
+      Action:
+        - "ssm:*"
+      Resource:
+        - "*"
+    - Effect: "Allow"
+      Action:
+        - "ec2:CreateNetworkInterface"
+        - "ec2:DescribeNetworkInterfaces"
+        - "ec2:DeleteNetworkInterface"
+      Resource:
+        - "*"
+functions:
+  telemetry_get:
+    handler: main.get
+    events:
+      - http:
+          path: /telemetry/{id}
+          method: GET
+          resp: http
+          request:
+            parameters:
+              paths:
+                id: true
+          cors: true
+custom:
+  pythonRequirements:
+    dockerizePip: True
+plugins:
+  - serverless-python-requirements

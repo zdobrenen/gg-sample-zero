@@ -1,0 +1,10 @@
+[Unit]
+Description={{ device_name }} Daemon
+
+[Service]
+Type=idle
+ExecStart=/gg_devices/{{ device_name }}/venv/bin/python /gg_devices/{{ device_name }}/ggdLEDLightYellow.py
+KillSignal=SIGQUIT
+
+[Install]
+WantedBy=multi-user.target

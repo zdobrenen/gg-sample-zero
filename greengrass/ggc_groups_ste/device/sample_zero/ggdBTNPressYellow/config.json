@@ -1,0 +1,13 @@
+{
+    "endpoint": "a3hy3ese1oynsa.iot.us-west-2.amazonaws.com",
+    "rootCAPath": "/greengrass/certs/root.ca.pem",
+    "certificatePath": "/greengrass/certs/GG_BTN_YELLOW.cert.pem",
+    "privateKeyPath": "/greengrass/certs/GG_BTN_YELLOW.private.key",
+    "thingName": "GG_BTN_YELLOW",
+    "clientId": "GG_BTN_YELLOW",
+    "deviceParams": {
+        "device": "GG_BTN_YELLOW",
+        "pin": 17,
+        "topic": "btn/yellow/telemetry/stream"
+    }
+}

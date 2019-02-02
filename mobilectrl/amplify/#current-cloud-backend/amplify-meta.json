@@ -1,0 +1,53 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "mobilectrl-20181222110145-authRole",
+			"UnauthRoleArn": "arn:aws:iam::399888931340:role/mobilectrl-20181222110145-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::399888931340:role/mobilectrl-20181222110145-authRole",
+			"Region": "us-west-2",
+			"DeploymentBucketName": "mobilectrl-20181222110145-deployment",
+			"UnauthRoleName": "mobilectrl-20181222110145-unauthRole",
+			"StackName": "mobilectrl-20181222110145",
+			"StackId": "arn:aws:cloudformation:us-west-2:399888931340:stack/mobilectrl-20181222110145/09260b90-061c-11e9-a29d-50a68af39629"
+		}
+	},
+	"hosting": {
+		"S3AndCloudFront": {
+			"service": "S3AndCloudFront",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/mobilectrl-20181222110145-deployment/amplify-cfn-templates/hosting/template.json",
+				"logicalId": "hostingS3AndCloudFront"
+			},
+			"lastPushTimeStamp": "2018-12-22T19:06:59.339Z",
+			"output": {
+				"S3BucketSecureURL": "https://mobilectrl-20181222110315--hostingbucket.s3.amazonaws.com",
+				"WebsiteURL": "http://mobilectrl-20181222110315--hostingbucket.s3-website-us-west-2.amazonaws.com",
+				"Region": "us-west-2",
+				"HostingBucketName": "mobilectrl-20181222110315--hostingbucket"
+			},
+			"lastPushDirHash": "DbEPo1Cpbp9DOttQfdVoDUyD5m0="
+		}
+	},
+	"auth": {
+		"cognitob2c22d65": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/mobilectrl-20181222110145-deployment/amplify-cfn-templates/auth/cognitob2c22d65-cloudformation-template.yml",
+				"logicalId": "authcognitob2c22d65"
+			},
+			"lastPushTimeStamp": "2018-12-22T19:06:59.339Z",
+			"output": {
+				"AppClientSecret": "3f6kf0rul4jiq0fotc68ug6mtcuuhq8q69cn881in338gkgbo4f",
+				"UserPoolId": "us-west-2_QwJMvsFQ2",
+				"AppClientIDWeb": "731gb14utpeh19c1h7kecuqage",
+				"AppClientID": "6la65k83k50bp98ad0luaeeje4",
+				"IdentityPoolId": "us-west-2:413c5850-5af2-41d8-971c-b51a88c4ae64",
+				"IdentityPoolName": "cognitob2c22d65_identitypool_b2c22d65",
+				"UserPoolName": "cognitob2c22d65_userpool_b2c22d65"
+			},
+			"lastPushDirHash": "5P6c9BNQfy9v4tsBc7s/k23Mnkg="
+		}
+	}
+}
