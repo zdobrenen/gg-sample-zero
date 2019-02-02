@@ -17,7 +17,7 @@ IoT.
 
 ## Project Components
 
-- API Gateway
-- Backends
-- Greengrass
-- MobileCtrl
+- API Gateway, refer to [README](https://github.com/zdobrenen/gg-sample-zero/blob/master/apigateway/README.md)
+- Backends, refer to [README](https://github.com/zdobrenen/gg-sample-zero/blob/master/backends/README.md)
+- Greengrass, refer to [README](https://github.com/zdobrenen/gg-sample-zero/blob/master/greengrass/README.md)
+- MobileCtrl, refer to [README](https://github.com/zdobrenen/gg-sample-zero/blob/master/mobilectrl/README.md)
