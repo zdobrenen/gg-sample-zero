@@ -145,7 +145,7 @@ to [InfluxDB Installation](https://docs.influxdata.com/influxdb/v1.7/introductio
 
 
 ### Wiring Guide:
-![Simple Zero Wiring](https://bitbucket.org/petrichorai-budwatch/aws-budwatch/raw/32c29b2ada2179add4802b94297bfe549637d9ae/greengrass/simple_zero_wiring.jpg)
+![Simple Zero Wiring](https://github.com/zdobrenen/gg-sample-zero/blob/master/greengrass/simple_zero_wiring.jpg)
 
 
 ### Setup:
