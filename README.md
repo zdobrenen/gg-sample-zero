@@ -1,9 +1,9 @@
-#AWS Greengrass Sample Zero
+# AWS Greengrass Sample Zero
 
 A sample project intended to demonstrate an in-depth yet simple utilization of AWS Cloud Services.
 
 
-##Project Components
+## Project Components
 
 - API Gateway
 - Backends
